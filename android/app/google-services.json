@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "287646430711",
+    "project_id": "fit-glow",
+    "storage_bucket": "fit-glow.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:287646430711:android:fc06af008f284b7c512af2",
+        "android_client_info": {
+          "package_name": "com.mateuszptak.flutter_application_2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrembqMLUyzjGYydkROwCOPoPQ-f3a_Ag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
