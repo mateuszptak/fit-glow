@@ -1,9 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/pages/login_page.dart';
 import 'package:flutter_application_2/widgets/custom_background_image.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CreateAccount extends StatefulWidget {
-  const CreateAccount({super.key});
+  CreateAccount({super.key});
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   State<CreateAccount> createState() => _CreateAccountState();
@@ -55,19 +60,21 @@ class _CreateAccountState extends State<CreateAccount> {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        const TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Login',
+                        TextField(
+                          controller: widget.emailController,
+                          decoration: const InputDecoration(
+                            hintText: 'Email',
                             hintStyle: TextStyle(color: Colors.white),
                             prefixIcon: Icon(
                               Icons.login,
                               color: Colors.white,
                             ),
                           ),
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ),
                         const SizedBox(height: 10),
                         TextField(
+                          controller: widget.passwordController,
                           obscureText: !_isPasswordVisible,
                           decoration: InputDecoration(
                             hintText: 'Password',
@@ -89,27 +96,27 @@ class _CreateAccountState extends State<CreateAccount> {
                           style: const TextStyle(color: Colors.white),
                         ),
                         const SizedBox(height: 20),
-                        TextField(
-                          obscureText: !_isPasswordVisible,
-                          decoration: InputDecoration(
-                            hintText: 'Confirm Password',
-                            hintStyle: const TextStyle(color: Colors.white),
-                            suffixIcon: IconButton(
-                              onPressed: _togglePasswordVisibility,
-                              icon: Icon(
-                                _isPasswordVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: Colors.yellow,
-                              ),
-                            ),
-                            prefixIcon: const Icon(
-                              Icons.lock,
-                              color: Colors.white,
-                            ),
-                          ),
-                          style: const TextStyle(color: Colors.white),
-                        ),
+                        // TextField(
+                        //   obscureText: !_isPasswordVisible,
+                        //   decoration: InputDecoration(
+                        //     hintText: 'Confirm Password',
+                        //     hintStyle: const TextStyle(color: Colors.white),
+                        //     suffixIcon: IconButton(
+                        //       onPressed: _togglePasswordVisibility,
+                        //       icon: Icon(
+                        //         _isPasswordVisible
+                        //             ? Icons.visibility
+                        //             : Icons.visibility_off,
+                        //         color: Colors.yellow,
+                        //       ),
+                        //     ),
+                        //     prefixIcon: const Icon(
+                        //       Icons.lock,
+                        //       color: Colors.white,
+                        //     ),
+                        //   ),
+                        //   style: const TextStyle(color: Colors.white),
+                        // ),
                         const SizedBox(height: 5),
                         TextButton(
                           onPressed: () => Navigator.of(context).pop(),
@@ -133,7 +140,17 @@ class _CreateAccountState extends State<CreateAccount> {
                 child: Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      FirebaseAuth.instance.createUserWithEmailAndPassword(
+                        email: widget.emailController.text,
+                        password: widget.passwordController.text,
+                      );
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => LoginPage(),
+                        ),
+                      );
+                    },
                     icon: const Icon(
                       Icons.arrow_forward,
                       size: 40,

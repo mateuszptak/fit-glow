@@ -15,6 +15,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String errorMessage = '';
+
   bool _isPasswordVisible = false;
 
   void _togglePasswordVisibility() {
@@ -33,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: MediaQuery.of(context).size.height * 0.4),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.3),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
@@ -117,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                             TextButton(
                               onPressed: () => Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => const CreateAccount(),
+                                  builder: (context) => CreateAccount(),
                                 ),
                               ),
                               child: Text(
@@ -132,6 +134,14 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Text(
+                  errorMessage,
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+              const SizedBox(height: 10),
               Container(
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 227, 204, 1),
@@ -147,7 +157,9 @@ class _LoginPageState extends State<LoginPage> {
                           password: widget.passwordController.text,
                         );
                       } catch (error) {
-                        print(error);
+                        setState(() {
+                          errorMessage = error.toString();
+                        });
                       }
                     },
                     icon: const Icon(
