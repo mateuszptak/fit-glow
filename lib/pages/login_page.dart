@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/pages/create_account.dart';
 import 'package:flutter_application_2/pages/forgot_details.dart';
@@ -5,8 +6,10 @@ import 'package:flutter_application_2/widgets/custom_background_image.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
 
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -59,8 +62,9 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        const TextField(
-                          decoration: InputDecoration(
+                        TextField(
+                          controller: widget.emailController,
+                          decoration: const InputDecoration(
                             hintText: 'Login',
                             hintStyle: TextStyle(color: Colors.white),
                             prefixIcon: Icon(
@@ -68,10 +72,11 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.white,
                             ),
                           ),
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ),
                         const SizedBox(height: 10),
                         TextField(
+                          controller: widget.passwordController,
                           obscureText: !_isPasswordVisible,
                           decoration: InputDecoration(
                             hintText: 'Password',
@@ -135,7 +140,16 @@ class _LoginPageState extends State<LoginPage> {
                 child: Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      try {
+                        await FirebaseAuth.instance.signInWithEmailAndPassword(
+                          email: widget.emailController.text,
+                          password: widget.passwordController.text,
+                        );
+                      } catch (error) {
+                        print(error);
+                      }
+                    },
                     icon: const Icon(
                       Icons.arrow_forward,
                       size: 40,
