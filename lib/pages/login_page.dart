@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/pages/bmi_calculator.dart';
 import 'package:flutter_application_2/pages/create_account.dart';
 import 'package:flutter_application_2/pages/forgot_details.dart';
 import 'package:flutter_application_2/widgets/custom_background_image.dart';
@@ -155,6 +156,11 @@ class _LoginPageState extends State<LoginPage> {
                         await FirebaseAuth.instance.signInWithEmailAndPassword(
                           email: widget.emailController.text,
                           password: widget.passwordController.text,
+                        );
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const BmiCalculator(),
+                          ),
                         );
                       } catch (error) {
                         setState(() {

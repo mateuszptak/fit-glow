@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/pages/login_page.dart';
 import 'package:flutter_application_2/widgets/custom_background_image.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -15,6 +14,7 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
+  String errorMessage = '';
   bool _isPasswordVisible = false;
 
   void _togglePasswordVisibility() {
@@ -132,6 +132,14 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: Text(
+                  errorMessage,
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+              const SizedBox(height: 20),
               Container(
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 227, 204, 1),
@@ -140,16 +148,18 @@ class _CreateAccountState extends State<CreateAccount> {
                 child: Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: IconButton(
-                    onPressed: () {
-                      FirebaseAuth.instance.createUserWithEmailAndPassword(
-                        email: widget.emailController.text,
-                        password: widget.passwordController.text,
-                      );
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => LoginPage(),
-                        ),
-                      );
+                    onPressed: () async {
+                      try {
+                        await FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                          email: widget.emailController.text,
+                          password: widget.passwordController.text,
+                        );
+                      } catch (e) {
+                        setState(() {
+                          errorMessage = e.toString();
+                        });
+                      }
                     },
                     icon: const Icon(
                       Icons.arrow_forward,

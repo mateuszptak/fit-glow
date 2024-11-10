@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/pages/create_account.dart';
+import 'package:flutter_application_2/pages/bmi_calculator.dart';
 import 'package:flutter_application_2/pages/login_page.dart';
 import 'package:flutter_application_2/widgets/custom_background_image.dart';
 import 'package:flutter_application_2/widgets/my_custom_button.dart';
@@ -58,11 +58,7 @@ class WelcomePage extends StatelessWidget {
               ),
             );
           } else {
-            return Scaffold(
-              body: Center(
-                child: Text('witaj ${user.email}'),
-              ),
-            );
+            return const BmiCalculator();
           }
         });
   }
