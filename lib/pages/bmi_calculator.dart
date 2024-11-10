@@ -14,6 +14,7 @@ class BmiCalculator extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pop();
                 },
                 child: const Text("LogOut();"),
               ),

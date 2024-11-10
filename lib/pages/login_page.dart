@@ -167,6 +167,8 @@ class _LoginPageState extends State<LoginPage> {
                           errorMessage = error.toString();
                         });
                       }
+                      widget.emailController.clear();
+                      widget.passwordController.clear();
                     },
                     icon: const Icon(
                       Icons.arrow_forward,
