@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/pages/bmi_calculator.dart';
+import 'package:flutter_application_2/pages/main_page.dart';
 import 'package:flutter_application_2/pages/login_page.dart';
 import 'package:flutter_application_2/widgets/custom_background_image.dart';
 import 'package:flutter_application_2/widgets/my_custom_button.dart';
@@ -31,9 +31,10 @@ class WelcomePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 30),
                         child: Text(
-                          '''Exercise regularly 
-        and be physically 
-        active''',
+                          '''
+  Exercise regularly 
+  and be physically 
+  active''',
                           style: GoogleFonts.cabin(
                             fontStyle: FontStyle.italic,
                             color: const Color.fromARGB(255, 206, 203, 203),
@@ -58,7 +59,7 @@ class WelcomePage extends StatelessWidget {
               ),
             );
           } else {
-            return const BmiCalculator();
+            return const MainPage();
           }
         });
   }
