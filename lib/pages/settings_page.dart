@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/widgets/count_widget.dart';
-import 'package:flutter_application_2/widgets/custom_background_image.dart';
 import 'package:flutter_application_2/widgets/settings_row_widget.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -31,25 +29,32 @@ class SettingsPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(25),
               ),
               width: MediaQuery.of(context).size.width / 1.2,
-              child: const Padding(
-                padding: EdgeInsets.all(15.0),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SettingsRawWidget(
+                    const SettingsRawWidget(
                       settingsName: 'Dark Mode',
                       settingsWidget: Icon(Icons.toggle_on, size: 36),
                     ),
-                    Divider(color: Colors.black, thickness: 4.0),
-                    SettingsRawWidget(
+                    const Divider(color: Colors.black, thickness: 4.0),
+                    const SettingsRawWidget(
                       settingsName: 'Notifications',
                       settingsWidget: Icon(Icons.toggle_on, size: 36),
                     ),
-                    Divider(color: Colors.black, thickness: 4.0),
+                    const Divider(color: Colors.black, thickness: 4.0),
                     SettingsRawWidget(
                       settingsName: 'Time Before',
-                      settingsWidget: CountWidget(),
+                      settingsWidget: Container(
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: const Color.fromARGB(255, 17, 16, 16),
+                        ),
+                        child: const CountWidget(),
+                      ),
                     )
                   ],
                 ),
@@ -67,6 +72,61 @@ class SettingsPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class CountWidget extends StatefulWidget {
+  const CountWidget({
+    super.key,
+  });
+
+  @override
+  State<CountWidget> createState() => _CountWidgetState();
+}
+
+class _CountWidgetState extends State<CountWidget> {
+  int counter = 25;
+
+  void _incrementCounter() {
+    setState(() {
+      counter += 5;
+    });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      if (counter > 0) {
+        counter -= 5;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        IconButton(
+          onPressed: _decrementCounter,
+          icon: const Icon(
+            Icons.remove,
+            size: 25,
+            color: Colors.white,
+          ),
+        ),
+        Text(
+          counter.toString(),
+          style: const TextStyle(color: Colors.white, fontSize: 25),
+        ),
+        IconButton(
+          onPressed: _incrementCounter,
+          icon: const Icon(
+            Icons.add,
+            size: 25,
+            color: Colors.white,
+          ),
+        ),
+      ],
     );
   }
 }
