@@ -44,7 +44,6 @@ class SettingsPage extends StatelessWidget {
                       settingsName: 'Notifications',
                       settingsWidget: Icon(Icons.toggle_on, size: 36),
                     ),
-                    const Divider(color: Colors.black, thickness: 4.0),
                     SettingsRawWidget(
                       settingsName: 'Time Before',
                       settingsWidget: Container(
@@ -55,11 +54,40 @@ class SettingsPage extends StatelessWidget {
                         ),
                         child: const CountWidget(),
                       ),
-                    )
+                    ),
+                    const Divider(color: Colors.black, thickness: 4.0),
+                    const SettingsRawWidget(
+                      settingsName: 'Change e-mail:',
+                      settingsWidget: Icon(Icons.toggle_on, size: 36),
+                    ),
+                    const Divider(color: Colors.black, thickness: 4.0),
+                    const SettingsRawWidget(
+                      settingsName: 'Change password:',
+                      settingsWidget: Icon(Icons.toggle_on, size: 36),
+                    ),
+                    const Divider(color: Colors.black, thickness: 4.0),
+                    const SizedBox(height: 15),
+                    const Center(
+                      child: Text(
+                        'Contact us',
+                        style: TextStyle(color: Colors.white, fontSize: 30),
+                      ),
+                    ),
+                    const SettingsRawWidget(
+                      settingsName: 'Phone number:',
+                      settingsWidget: Icon(Icons.toggle_on, size: 36),
+                    ),
+                    const Divider(color: Colors.black, thickness: 4.0),
+                    const SettingsRawWidget(
+                      settingsName: 'E-mail address:',
+                      settingsWidget: Icon(Icons.toggle_on, size: 36),
+                    ),
+                    const Divider(color: Colors.black, thickness: 4.0),
                   ],
                 ),
               ),
             ),
+            const SizedBox(height: 30),
             Center(
               child: ElevatedButton(
                 onPressed: () {
@@ -69,6 +97,7 @@ class SettingsPage extends StatelessWidget {
                 child: const Text("LogOut();"),
               ),
             ),
+            const SizedBox(height: 60),
           ],
         ),
       ),
