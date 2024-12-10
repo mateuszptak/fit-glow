@@ -18,6 +18,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.grey,
         extendBody: true,
         body: Builder(builder: (context) {
           if (currentIndex == 2) {
