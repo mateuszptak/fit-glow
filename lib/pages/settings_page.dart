@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/widgets/my_custom_textfield.dart';
 import 'package:flutter_application_2/widgets/settings_row_widget.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -69,20 +70,60 @@ class SettingsPage extends StatelessWidget {
                     const SizedBox(height: 15),
                     const Center(
                       child: Text(
-                        'Contact us',
+                        'Get in touch with us',
                         style: TextStyle(color: Colors.white, fontSize: 30),
                       ),
                     ),
-                    const SettingsRawWidget(
-                      settingsName: 'Phone number:',
-                      settingsWidget: Icon(Icons.toggle_on, size: 36),
+                    const SizedBox(height: 20),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              backgroundColor:
+                                  const Color.fromARGB(255, 41, 40, 40),
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 15),
+                              content: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    const SizedBox(height: 20),
+                                    const MyCustomTextField(
+                                        keyboardType: TextInputType.text,
+                                        labelText: 'Your Name'),
+                                    const SizedBox(height: 10),
+                                    const MyCustomTextField(
+                                        keyboardType:
+                                            TextInputType.emailAddress,
+                                        labelText: 'Your Email'),
+                                    const SizedBox(height: 10),
+                                    const MyCustomTextField(
+                                        keyboardType: TextInputType.phone,
+                                        labelText: 'Your Phone'),
+                                    const SizedBox(height: 10),
+                                    const MyCustomTextField(
+                                        labelText: 'Your Message',
+                                        maxLines: 5,
+                                        minLines: 5),
+                                    const SizedBox(height: 20),
+                                    SizedBox(
+                                      width: double.infinity,
+                                      child: ElevatedButton(
+                                        onPressed: () {},
+                                        child: const Text('Send Message'),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        child: const Text('Contact us'),
+                      ),
                     ),
-                    const Divider(color: Colors.black, thickness: 4.0),
-                    const SettingsRawWidget(
-                      settingsName: 'E-mail address:',
-                      settingsWidget: Icon(Icons.toggle_on, size: 36),
-                    ),
-                    const Divider(color: Colors.black, thickness: 4.0),
                   ],
                 ),
               ),
