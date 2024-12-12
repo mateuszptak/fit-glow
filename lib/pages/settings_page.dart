@@ -1,10 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/widgets/constact_us_dialog.dart';
+import 'package:flutter_application_2/widgets/email_change_dialog.dart';
 import 'package:flutter_application_2/widgets/my_custom_textfield.dart';
+import 'package:flutter_application_2/widgets/password_change_dialog.dart';
 import 'package:flutter_application_2/widgets/settings_row_widget.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
+
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  bool isDarkModeOn = true;
+  bool areNotificationsOn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +47,38 @@ class SettingsPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SettingsRawWidget(
+                    SettingsRawWidget(
                       settingsName: 'Dark Mode',
-                      settingsWidget: Icon(Icons.toggle_on, size: 36),
+                      settingsWidget: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            isDarkModeOn = !isDarkModeOn;
+                          });
+                        },
+                        icon: Icon(
+                            isDarkModeOn == true
+                                ? Icons.toggle_on
+                                : Icons.toggle_off_outlined,
+                            size: 40,
+                            color: Colors.white),
+                      ),
                     ),
                     const Divider(color: Colors.black, thickness: 4.0),
-                    const SettingsRawWidget(
+                    SettingsRawWidget(
                       settingsName: 'Notifications',
-                      settingsWidget: Icon(Icons.toggle_on, size: 36),
+                      settingsWidget: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            areNotificationsOn = !areNotificationsOn;
+                          });
+                        },
+                        icon: Icon(
+                            areNotificationsOn
+                                ? Icons.toggle_on
+                                : Icons.toggle_off_outlined,
+                            size: 40,
+                            color: Colors.white),
+                      ),
                     ),
                     SettingsRawWidget(
                       settingsName: 'Time Before',
@@ -57,21 +92,39 @@ class SettingsPage extends StatelessWidget {
                       ),
                     ),
                     const Divider(color: Colors.black, thickness: 4.0),
-                    const SettingsRawWidget(
+                    SettingsRawWidget(
                       settingsName: 'Change e-mail:',
-                      settingsWidget: Icon(Icons.toggle_on, size: 36),
+                      settingsWidget: ElevatedButton(
+                        onPressed: () {
+                          showDialog(
+                            barrierDismissible: false,
+                            context: context,
+                            builder: (context) => const EmailChangeDialog(),
+                          );
+                        },
+                        child: const Text('Here'),
+                      ),
                     ),
                     const Divider(color: Colors.black, thickness: 4.0),
-                    const SettingsRawWidget(
+                    SettingsRawWidget(
                       settingsName: 'Change password:',
-                      settingsWidget: Icon(Icons.toggle_on, size: 36),
+                      settingsWidget: ElevatedButton(
+                        onPressed: () {
+                          showDialog(
+                            barrierDismissible: false,
+                            context: context,
+                            builder: (context) => const PasswordChangeDialog(),
+                          );
+                        },
+                        child: const Text('Here'),
+                      ),
                     ),
                     const Divider(color: Colors.black, thickness: 4.0),
                     const SizedBox(height: 15),
                     const Center(
                       child: Text(
                         'Get in touch with us',
-                        style: TextStyle(color: Colors.white, fontSize: 30),
+                        style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -79,46 +132,9 @@ class SettingsPage extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           showDialog(
+                            barrierDismissible: false,
                             context: context,
-                            builder: (context) => AlertDialog(
-                              backgroundColor:
-                                  const Color.fromARGB(255, 41, 40, 40),
-                              contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 15),
-                              content: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    const SizedBox(height: 20),
-                                    const MyCustomTextField(
-                                        keyboardType: TextInputType.text,
-                                        labelText: 'Your Name'),
-                                    const SizedBox(height: 10),
-                                    const MyCustomTextField(
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                        labelText: 'Your Email'),
-                                    const SizedBox(height: 10),
-                                    const MyCustomTextField(
-                                        keyboardType: TextInputType.phone,
-                                        labelText: 'Your Phone'),
-                                    const SizedBox(height: 10),
-                                    const MyCustomTextField(
-                                        labelText: 'Your Message',
-                                        maxLines: 5,
-                                        minLines: 5),
-                                    const SizedBox(height: 20),
-                                    SizedBox(
-                                      width: double.infinity,
-                                      child: ElevatedButton(
-                                        onPressed: () {},
-                                        child: const Text('Send Message'),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 10),
-                                  ],
-                                ),
-                              ),
-                            ),
+                            builder: (context) => const ContactUsDialog(),
                           );
                         },
                         child: const Text('Contact us'),
@@ -180,19 +196,19 @@ class _CountWidgetState extends State<CountWidget> {
           onPressed: _decrementCounter,
           icon: const Icon(
             Icons.remove,
-            size: 25,
+            size: 20,
             color: Colors.white,
           ),
         ),
         Text(
           counter.toString(),
-          style: const TextStyle(color: Colors.white, fontSize: 25),
+          style: const TextStyle(color: Colors.white, fontSize: 20),
         ),
         IconButton(
           onPressed: _incrementCounter,
           icon: const Icon(
             Icons.add,
-            size: 25,
+            size: 20,
             color: Colors.white,
           ),
         ),
