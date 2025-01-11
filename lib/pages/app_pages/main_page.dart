@@ -1,8 +1,6 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/pages/settings_page.dart';
-import 'package:flutter_application_2/widgets/custom_background_image.dart';
+import 'package:flutter_application_2/pages/app_pages/settings_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -22,7 +20,7 @@ class _MainPageState extends State<MainPage> {
         extendBody: true,
         body: Builder(builder: (context) {
           if (currentIndex == 2) {
-            return SettingsPage();
+            return const SettingsPage();
           } else if (currentIndex == 1) {
             return const Center(
               child: Text("Ekran numer 2"),

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/pages/main_page.dart';
-import 'package:flutter_application_2/pages/login_page.dart';
+import 'package:flutter_application_2/pages/app_pages/main_page.dart';
+import 'package:flutter_application_2/pages/credentials_pages/login_page.dart';
 import 'package:flutter_application_2/widgets/custom_background_image.dart';
 import 'package:flutter_application_2/widgets/my_custom_button.dart';
 import 'package:google_fonts/google_fonts.dart';

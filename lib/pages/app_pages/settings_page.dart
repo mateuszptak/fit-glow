@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/widgets/constact_us_dialog.dart';
 import 'package:flutter_application_2/widgets/email_change_dialog.dart';
-import 'package:flutter_application_2/widgets/my_custom_textfield.dart';
 import 'package:flutter_application_2/widgets/password_change_dialog.dart';
 import 'package:flutter_application_2/widgets/settings_row_widget.dart';
 
@@ -20,25 +19,23 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 22, 20, 20),
+      backgroundColor: const Color.fromARGB(255, 22, 22, 20),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const SizedBox(height: 20),
-            Container(
-              height: 200,
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.circular(80),
-              ),
-              child: Image.asset('assets/logo.png'),
+            CircleAvatar(
+              radius: 100,
+              backgroundColor: Colors.transparent,
+              child: Image.asset('assets/logo_fg.png'),
             ),
             const SizedBox(height: 30),
             Container(
               decoration: BoxDecoration(
                 color: const Color.fromARGB(255, 41, 40, 40),
                 borderRadius: BorderRadius.circular(25),
+                border: Border.all(color: Colors.white, width: 1.0),
               ),
               width: MediaQuery.of(context).size.width / 1.2,
               child: Padding(
@@ -59,7 +56,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             isDarkModeOn == true
                                 ? Icons.toggle_on
                                 : Icons.toggle_off_outlined,
-                            size: 40,
+                            size: 48,
                             color: Colors.white),
                       ),
                     ),
@@ -76,7 +73,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             areNotificationsOn
                                 ? Icons.toggle_on
                                 : Icons.toggle_off_outlined,
-                            size: 40,
+                            size: 48,
                             color: Colors.white),
                       ),
                     ),
